@@ -224,7 +224,7 @@
 				setStatusMode('indeterminate');
 				Promise.all([ engine.init(mywasm), engine.preloadFile(mypck)
 				]).
-				then(() => {console.log('Files preloaded successufully');
+				then(() => {console.log('Files preloaded successfully');
 				return engine.startGame({
 					'onProgress': function (current, total) {
 						if (total > 0) {
