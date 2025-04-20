@@ -259,7 +259,7 @@
 				displayFailureNotice('WebGL not available');
 			} else {
 				setStatusMode('indeterminate');
-				Promise.all([ engine.ini(mywasm), engine.preloadFile(mypck)
+				Promise.all([ engine.init(mywasm), engine.preloadFile(mypck)
 				]).
 				then(() => {console.log('File preloaded successufully');
 				return engine.startGame({
