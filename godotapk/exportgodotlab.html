@@ -159,6 +159,8 @@
 
 	<script type='text/javascript' src='exportgodotlab.js'></script>
 	<script type='text/javascript'>//<![CDATA[
+		const mywasm = 'https://minec-c.github.io/satnotcanvasxz/wasm2/exportgodotlab';
+		const mypck = 'https://minec-c.github.io/satnotcanvasxz/godotapk/exportgodotlab.pck';
 
 		const GODOT_CONFIG = {"args":[],"canvasResizePolicy":2,"executable":"exportgodotlab","experimentalVK":false,"fileSizes":{"exportgodotlab.pck":10000,"exportgodotlab.wasm":23246030},"focusCanvas":true,"gdnativeLibs":[]};
 		var engine = new Engine(GODOT_CONFIG);
@@ -242,7 +244,10 @@
 				displayFailureNotice('WebGL not available');
 			} else {
 				setStatusMode('indeterminate');
-				engine.startGame({
+				Promise.all([ engine.init(mywasm), engine.preloadFile(mypck)
+				]).
+				then(() => {console.log('Files preloaded successfully');
+				return engine.startGame({
 					'onProgress': function (current, total) {
 						if (total > 0) {
 							statusProgressInner.style.width = current/total * 100 + '%';
@@ -261,6 +266,7 @@
 					setStatusMode('hidden');
 					initializing = false;
 				}, displayFailureNotice);
+			   })
 			}
 		})();
 	//]]></script>
